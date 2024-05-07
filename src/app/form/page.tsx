@@ -7,7 +7,7 @@ export default function Page() {
       <div className="bg-green min-h-screen flex flex-col justify-center items-center text-black">
         <h1 className="text-4xl mb-8 font-space-grotesk">DietGPT - Formulario</h1>
 
-        <form className="max-w-md w-full font-poppins">
+        <form className="max-w-xs w-full font-poppins md:font-montserrat">
           {/* Pregunta: Sexo */}
           <div className="mb-6">
             <label className="block mb-2">Sexo:</label>
