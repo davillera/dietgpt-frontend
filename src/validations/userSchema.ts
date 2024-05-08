@@ -38,6 +38,10 @@ export const userSchema = z.object({
     message: 'La altura es requerida'
   }).transform((height) => Number(height)),
 
+  weight: z.string().refine((weight) => isNaN(parseFloat(weight)),{
+    message: 'El peso en Kilogramos es requerido'
+  }).transform((weight) => Number(weight)),
+
   bodyType: z.enum(bodyType, {
     errorMap: () => ({message: 'Por favor selecciona un Tipo de Cuerpo'})
   }),

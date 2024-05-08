@@ -8,6 +8,7 @@ type Inputs = {
   sex: string,
   age: number,
   height: number,
+  weight: number,
   bodyType: string,
   exerciseFrequency: number,
   goal: string,
@@ -47,14 +48,14 @@ export default function Page() {
   return (
     <>
       <div className="bg-green min-h-screen flex flex-col justify-center items-center text-black">
-        <h1 className="text-4xl mb-8 font-space-grotesk">DietGPT - Formulario</h1>
+        <h1 className="text-4xl mb-8 mt-4 font-space-grotesk">DietGPT - Formulario</h1>
 
         <form onSubmit={handleSubmit(onSubmit)} className="max-w-72 w-full font-poppins">
 
 
           {/* Pregunta: Sexo */}
           <div className="mb-6">
-            <label className="block mb-2">Sexo:</label>
+            <label className="block mb-2">Sexo</label>
             <select id="sex" className="bg-gray-200 border-2 border-gray-300 px-4 py-2 rounded w-full"
                     {...register('sex')}>
               {sexOptions}
@@ -67,7 +68,7 @@ export default function Page() {
 
           {/* Pregunta: Edad */}
           <div className="mb-6">
-            <label className="block mb-2">Edad:</label>
+            <label className="block mb-2">Edad</label>
             <input type="number" id="edad"
                    className="bg-gray-200 border-2 border-gray-300 px-4 py-2 rounded w-full"
                    {...register('age')}/>
@@ -76,9 +77,19 @@ export default function Page() {
             }
           </div>
 
+          <div className="mb-6">
+            <label className="block mb-2">Peso (Kg)</label>
+            <input type="number" id="peso"
+                   className="bg-gray-200 border-2 border-gray-300 px-4 py-2 rounded w-full"
+                   {...register('weight')}/>
+            {
+              errors.age?.message && <p>{errors.age?.message}</p>
+            }
+          </div>
+
           {/* Pregunta: Altura en cm */}
           <div className="mb-6">
-            <label className="block mb-2">Altura (cm):</label>
+            <label className="block mb-2">Altura (cm)</label>
             <input type="number" id="height"
                    className="bg-gray-200 border-2 border-gray-300 px-4 py-2 rounded w-full"
                    {...register('height')}/>
@@ -89,7 +100,7 @@ export default function Page() {
 
           {/* Pregunta: Tipo de cuerpo (somatotipos) */}
           <div className="mb-6">
-            <label className="block mb-2">Tipo de cuerpo:</label>
+            <label className="block mb-2">Tipo de cuerpo</label>
             <select id="bodyType"
                     className="bg-gray-200 border-2 border-gray-300 px-4 py-2 rounded w-full"
                     {...register('bodyType')}>
@@ -109,7 +120,7 @@ export default function Page() {
 
           {/* Pregunta: Frecuencia de ejercicio semanal */}
           <div className="mb-6">
-            <label className="block mb-2">Frecuencia de ejercicio semanal:</label>
+            <label className="block mb-2">Frecuencia de ejercicio semanal</label>
             <input type="number" id="exerciseFrequency"
                    className="bg-gray-200 border-2 border-gray-300 px-4 py-2 rounded w-full"
                    {...register('exerciseFrequency')}/>
@@ -120,7 +131,7 @@ export default function Page() {
 
           {/* Pregunta: Objetivo */}
           <div className="mb-6">
-            <label className="block mb-2">¿Cuál es su objetivo?</label>
+            <label className="block mb-2">Objetivo</label>
             <select id="goal"
                     className="bg-gray-200 border-2 border-gray-300 px-4 py-2 rounded w-full"
                     {...register('goal')}>
