@@ -15,7 +15,7 @@ export const mappedBodyType: {[key in bodyType]: string} = {
   Mesomorfo: 'Mesomorfo'
 }
 export const mappedGoal: {[key in goal]: string} = {
-  "Bajos niveles de grasa": 'Bajos Nveles de grasa',
+  "Bajos niveles de grasa": 'Bajos Niveles de grasa',
   "Ganar masa muscular": "Ganar masa muscular",
   "Tonificar": "Tonificar",
   "Mantenerse saludable": "Mantenerse saludable"
