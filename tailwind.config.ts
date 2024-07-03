@@ -13,6 +13,7 @@ const config: Config = {
       'space-grotesk': ['Space Grotesk']
     },
     colors: {
+      red: '#FF5555',
       green: '#74AA9C',
       white: '#F1EDEE',
       black: '#080F0F',

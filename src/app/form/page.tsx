@@ -19,7 +19,25 @@ export default function Page() {
     formState: { errors },
   } = useForm<FormInputs>();
 
-  const onSubmit: SubmitHandler<FormInputs> = (data) => console.log(data);
+  let completion;
+
+  const onSubmit: SubmitHandler<FormInputs> = (data) => getRecommendation(data);
+
+  const API = "http://localhost:3300"
+
+  const getRecommendation = async (data: FormInputs) => {
+    console.log(JSON.stringify(register));
+
+    const response = await fetch(`${API}/openai/completion`, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => completion = json);
+  };
 
   return (
     <>
@@ -42,7 +60,11 @@ export default function Page() {
               <option value="masculino">Masculino</option>
               <option value="femenino">Femenino</option>
             </select>
-            {errors.sex && <span>Este campo es requerido</span>}
+            {errors.sex && (
+              <span className="text-red font-medium">
+                Este campo es requerido
+              </span>
+            )}
           </div>
 
           <div className="mb-6">
@@ -151,8 +173,6 @@ export default function Page() {
             Quiero Mejorar mi estado físico
           </button>
         </form>
-
-        {/* <pre>{JSON.stringify(watch(), null, 2)}</pre> */}
       </div>
     </>
   );
