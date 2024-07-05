@@ -1,5 +1,7 @@
 "use client";
+import { useFormContext } from "../context/FormContext";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 type FormInputs = {
@@ -13,30 +15,19 @@ type FormInputs = {
 };
 
 export default function Page() {
+
+  const { setData } = useFormContext();
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormInputs>();
 
-  let completion;
-
-  const onSubmit: SubmitHandler<FormInputs> = (data) => getRecommendation(data);
-
-  const API = "http://localhost:3300"
-
-  const getRecommendation = async (data: FormInputs) => {
-    console.log(JSON.stringify(register));
-
-    const response = await fetch(`${API}/openai/completion`, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    })
-      .then((response) => response.json())
-      .then((json) => completion = json);
+  const onSubmit: SubmitHandler<FormInputs> = (data) => {
+    setData(data);
+    router.push("/recommendation");
   };
 
   return (
@@ -73,7 +64,7 @@ export default function Page() {
               type="number"
               id="edad"
               className="bg-gray-200 border-2 border-gray-300 px-4 py-2 rounded w-full"
-              {...register("age", { required: true, min: 16, max: 79 })}
+              {...register("age", { required: true, min: 15, max: 80 })}
             />
             {errors.age && (
               <span>La edad debe ser mayor a 15 y menor a 80 años</span>
