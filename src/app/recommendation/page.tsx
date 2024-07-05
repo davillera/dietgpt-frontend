@@ -6,10 +6,6 @@ import { useFormContext } from "../context/FormContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-interface FormData {
-  // Define aquí la interfaz de tu FormData según la estructura que tengas
-}
-
 interface PlanNutricional {
   desayuno: string;
   media_mañana: string;
@@ -29,9 +25,8 @@ interface ApiResponse {
 
 export default function Page() {
   const { FormData } = useFormContext();
-  console.log(FormData);
 
-  const API = "http://localhost:3300";
+  const API = process.env.NEXT_PUBLIC_API_URL;
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState<ApiResponse | null>(null);
@@ -41,8 +36,6 @@ export default function Page() {
   }, [FormData, API, router]);
 
   async function getRecommendation() {
-    console.log(API);
-
     setLoading(true); // Inicia el estado de carga
     await fetch(`${API}/openai/completion`, {
       method: "POST",
@@ -53,13 +46,13 @@ export default function Page() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data, "desde el fetch");
         setResponse(data); // Guarda la respuesta
         setLoading(false); // Finaliza el estado de carga
       })
       .catch((error) => {
         console.error("Error al realizar la solicitud:", error);
         setLoading(false); // Finaliza el estado de carga en caso de error
+        router.push("/form");
       });
   }
 
