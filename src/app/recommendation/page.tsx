@@ -26,7 +26,7 @@ interface ApiResponse {
 export default function Page() {
   const { FormData } = useFormContext();
 
-  const API = process.env.NEXT_PUBLIC_API_URL;
+  const API = process.env.API_URL;
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState<ApiResponse | null>(null);
